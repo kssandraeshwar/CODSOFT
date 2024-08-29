@@ -1,0 +1,218 @@
+#contactbook
+class Contact:
+    def __init__(self, name, phone, email, address):
+        self.name = name
+        self.phone = phone
+        self.email = email
+        self.address = address
+
+class ContactManager:
+    def __init__(self):
+        self.contacts = []
+
+    def add_contact(self, name, phone, email, address):
+        contact = Contact(name, phone, email, address)
+        self.contacts.append(contact)
+        print(f"Contact {name} added successfully.")
+
+    def view_contacts(self):
+        if not self.contacts:
+            print("No contacts found.")
+        else:
+            print("\nContact List:")
+            for i, contact in enumerate(self.contacts, 1):
+                print(f"{i}. {contact.name} - {contact.phone}")
+
+    def search_contact(self, search_term):
+        results = []
+        for contact in self.contacts:
+            if search_term.lower() in contact.name.lower() or search_term in contact.phone:
+                results.append(contact)
+        return results
+
+    def update_contact(self, index, name, phone, email, address):
+        if 0 <= index < len(self.contacts):
+            contact = self.contacts[index]
+            contact.name = name
+            contact.phone = phone
+            contact.email = email
+            contact.address = address
+            print(f"Contact {name} updated successfully.")
+        else:
+            print("Invalid contact index.")
+
+    def delete_contact(self, index):
+        if 0 <= index < len(self.contacts):
+            contact = self.contacts.pop(index)
+            print(f"Contact {contact.name} deleted successfully.")
+        else:
+            print("Invalid contact index.")
+
+def print_menu():
+    print("\nContact Management System")
+    print("1. Add Contact")
+    print("2. View Contacts")
+    print("3. Search Contact")
+    print("4. Update Contact")
+    print("5. Delete Contact")
+    print("6. Exit")
+
+def main():
+    manager = ContactManager()
+    
+    while True:
+        print_menu()
+        choice = input("Enter your choice (1-6): ")
+
+        if choice == '1':
+            name = input("Enter name: ")
+            phone = input("Enter phone number: ")
+            email = input("Enter email: ")
+            address = input("Enter address: ")
+            manager.add_contact(name, phone, email, address)
+
+        elif choice == '2':
+            manager.view_contacts()
+
+        elif choice == '3':
+            search_term = input("Enter name or phone number to search: ")
+            results = manager.search_contact(search_term)
+            if results:
+                print("\nSearch Results:")
+                for i, contact in enumerate(results, 1):
+                    print(f"{i}. {contact.name} - {contact.phone}")
+            else:
+                print("No matching contacts found.")
+
+        elif choice == '4':
+            manager.view_contacts()
+            index = int(input("Enter the index of the contact to update: ")) - 1
+            name = input("Enter new name: ")
+            phone = input("Enter new phone number: ")
+            email = input("Enter new email: ")
+            address = input("Enter new address: ")
+            manager.update_contact(index, name, phone, email, address)
+
+        elif choice == '5':
+            manager.view_contacts()
+            index = int(input("Enter the index of the contact to delete: ")) - 1
+            manager.delete_contact(index)
+
+        elif choice == '6':
+            print("Thank you for using the Contact Management System. Goodbye!")
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
+
+    #todotasks
+    class ToDoList:
+    def __init__(self):
+        self.tasks = []
+
+    def add_task(self, task):
+        self.tasks.append({"task": task, "completed": False})
+        print(f"Task '{task}' added successfully.")
+
+    def view_tasks(self):
+        if not self.tasks:
+            print("No tasks in the list.")
+        else:
+            for index, task in enumerate(self.tasks, 1):
+                status = "✓" if task["completed"] else " "
+                print(f"{index}. [{status}] {task['task']}")
+
+    def mark_completed(self, task_index):
+        if 1 <= task_index <= len(self.tasks):
+            self.tasks[task_index - 1]["completed"] = True
+            print(f"Task '{self.tasks[task_index - 1]['task']}' marked as completed.")
+        else:
+            print("Invalid task index.")
+
+    def remove_task(self, task_index):
+        if 1 <= task_index <= len(self.tasks):
+            removed_task = self.tasks.pop(task_index - 1)
+            print(f"Task '{removed_task['task']}' removed successfully.")
+        else:
+            print("Invalid task index.")
+
+def main():
+    todo_list = ToDoList()
+    
+    while True:
+        print("\n==== To-Do List Application ====")
+        print("1. Add Task")
+        print("2. View Tasks")
+        print("3. Mark Task as Completed")
+        print("4. Remove Task")
+        print("5. Exit")
+        
+        choice = input("Enter your choice (1-5): ")
+        
+        if choice == "1":
+            task = input("Enter the task: ")
+            todo_list.add_task(task)
+        elif choice == "2":
+            todo_list.view_tasks()
+        elif choice == "3":
+            todo_list.view_tasks()
+            task_index = int(input("Enter the task number to mark as completed: "))
+            todo_list.mark_completed(task_index)
+        elif choice == "4":
+            todo_list.view_tasks()
+            task_index = int(input("Enter the task number to remove: "))
+            todo_list.remove_task(task_index)
+        elif choice == "5":
+            print("Thank you for using the To-Do List Application. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
+
+    #calculator
+    def add(x, y):
+    return x + y
+
+def subtract(x, y):
+    return x - y
+
+def multiply(x, y):
+    return x * y
+
+def divide(x, y):
+    if y == 0:
+        return "Error: Division by zero"
+    return x / y
+
+print("Simple Calculator")
+print("Operations:")
+print("1. Add")
+print("2. Subtract")
+print("3. Multiply")
+print("4. Divide")
+
+while True:
+    choice = input("Enter operation number (1/2/3/4): ")
+    if choice in ('1', '2', '3', '4'):
+        num1 = float(input("Enter first number: "))
+        num2 = float(input("Enter second number: "))
+
+        if choice == '1':
+            print(f"{num1} + {num2} = {add(num1, num2)}")
+        elif choice == '2':
+            print(f"{num1} - {num2} = {subtract(num1, num2)}")
+        elif choice == '3':
+            print(f"{num1} * {num2} = {multiply(num1, num2)}")
+        elif choice == '4':
+            print(f"{num1} / {num2} = {divide(num1, num2)}")
+        
+        another = input("Do another calculation? (yes/no): ")
+        if another.lower() != 'yes':
+            break
+    else:
+        print("Invalid input. Please enter a number between 1 and 4.")
